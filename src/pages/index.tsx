@@ -1,12 +1,16 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
 
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
-
+  const owo = trpc.scrape.conjugate.useQuery({ verb: "pizcar" }, { refetchOnWindowFocus: false});
+  useEffect(() => {
+    console.log(owo.data);
+  }, [owo]);
   return (
     <>
       <Head>
